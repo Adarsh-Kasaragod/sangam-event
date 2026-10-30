@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar__inner">
         <Link to="/" className="navbar__logo" onClick={closeMenu}>
-          <div className="navbar__logo-icon">🎓</div>
+          <div className="navbar__logo-icon">S</div>
           <span className="navbar__logo-text">Sangam</span>
         </Link>
 
@@ -40,7 +40,7 @@ export default function Navbar() {
         <ul className={`navbar__links${menuOpen ? ' open' : ''}`} role="list">
           <li>
             <NavLink to="/" end onClick={closeMenu}>
-              🗓 Events
+              Events
             </NavLink>
           </li>
 
@@ -70,14 +70,14 @@ export default function Navbar() {
                   onClick={handleLogout}
                   aria-label="Logout"
                 >
-                  🚪 Logout
+                  Logout
                 </button>
               </li>
             </>
           ) : (
             <li>
               <NavLink to="/admin/login" onClick={closeMenu}>
-                🔒 Admin
+                Admin
               </NavLink>
             </li>
           )}

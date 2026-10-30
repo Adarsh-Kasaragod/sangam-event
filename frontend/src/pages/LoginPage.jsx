@@ -40,8 +40,6 @@ export default function LoginPage() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <div className="login-card__icon">🔐</div>
-
         <h1>Admin Login</h1>
         <p className="login-card__subtitle">
           Sign in to access the Sangam Event Portal dashboard
@@ -112,7 +110,7 @@ export default function LoginPage() {
             disabled={loading}
             aria-busy={loading}
           >
-            {loading ? 'Signing in…' : '🔓 Sign In'}
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
       </div>
