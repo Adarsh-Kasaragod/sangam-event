@@ -10,6 +10,7 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../helpers/cors.php';
 require_once __DIR__ . '/../helpers/response.php';
 require_once __DIR__ . '/../helpers/validate.php';
+require_once __DIR__ . '/../helpers/mailer.php';
 
 setCorsHeaders();
 
@@ -103,8 +104,11 @@ try {
     errorResponse('Registration failed due to a database error', 500);
 }
 
+// Send confirmation email (non-blocking — registration succeeds even if email fails)
+sendRegistrationEmail($email, $name, $event);
+
 jsonResponse([
-    'message' => 'Registration successful! We look forward to seeing you at the event.',
+    'message' => 'Registration successful! A confirmation email has been sent.',
     'registration' => [
         'event_id' => $eventId,
         'name'     => $name,
