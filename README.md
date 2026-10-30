@@ -84,8 +84,8 @@ Students can browse college events and register for them. Administrators manage 
 
 ```bash
 # 1. Clone the repository
-git clone cd event-app to https://github.com/Adarsh-Kasaragod/sangam-event.git
-cd event-app
+git clone https://github.com/Adarsh-Kasaragod/sangam-event.git
+cd sangam-event
 
 # 2. Install frontend dependencies
 cd frontend
