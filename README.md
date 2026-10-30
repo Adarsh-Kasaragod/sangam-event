@@ -19,8 +19,6 @@ Students can browse college events and register for them. Administrators manage 
 9. [Database Schema Overview](#9-database-schema-overview)
 10. [Design Decisions](#10-design-decisions)
 11. [Known Limitations & Future Improvements](#11-known-limitations--future-improvements)
-12. [Deployment](#12-deployment)
-13. [AI Usage Disclosure](#13-ai-usage-disclosure)
 
 ---
 
@@ -69,7 +67,6 @@ Students can browse college events and register for them. Administrators manage 
 | Backend | PHP 8.2, PDO with prepared statements |
 | Database | MySQL 8 |
 | Auth | Stateless HMAC-SHA256 token (no session, no library) |
-| Hosting | Vercel (frontend) + Render Docker (backend) |
 | Fonts | Google Fonts — Inter + Outfit |
 
 ---
@@ -87,7 +84,7 @@ Students can browse college events and register for them. Administrators manage 
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/event-app.git
+git clone cd event-app to https://github.com/Adarsh-Kasaragod/sangam-event.git
 cd event-app
 
 # 2. Install frontend dependencies
@@ -136,11 +133,7 @@ Run the setup script once to insert the hashed admin password:
 
 ```bash
 php setup_admin.php
-```
 
-Default credentials: `admin@college.edu` / `Admin@123`
-
-> ⚠️ **Change the password** in `setup_admin.php` before using in production.
 
 ---
 
@@ -149,7 +142,7 @@ Default credentials: `admin@college.edu` / `Admin@123`
 ### Backend (XAMPP)
 
 1. Copy the `event-app` folder into `C:\xampp\htdocs\`  
-   → Backend accessible at `http://localhost/event-app/backend/api/`
+   → Backend accessible at `http://localhost/sangam-event/backend/api/`
 2. Ensure Apache and MySQL are running in XAMPP Control Panel
 3. The `.env` file at `event-app/.env` is loaded automatically by `backend/config/db.php`
 
@@ -194,7 +187,7 @@ Register a student for an event.
 #### `POST /api/login.php`
 Admin login.
 - **Body:** `{ "email": "admin@college.edu", "password": "Admin@123" }`
-- **Response 200:** `{ "token": "...", "admin": { "id": 1, "email": "..." } }`
+- **Response 201:** `{ "token": "...", "admin": { "id": 1, "email": "..." } }`
 - **Response 401:** Invalid credentials
 
 #### `GET /api/stats.php`
@@ -291,38 +284,4 @@ Events store an `image_url` string (external URL). File upload is listed as a fu
 
 ---
 
-## 12. Deployment
 
-### Frontend → Vercel
-
-1. Push the repository to GitHub
-2. Import the project on [vercel.com](https://vercel.com)
-3. Set **Root Directory** to `frontend/`
-4. Add environment variable: `VITE_API_URL=https://your-backend.onrender.com/api`
-5. The `frontend/vercel.json` already handles React Router SPA rewrites
-
-### Backend → Render (Docker)
-
-1. Create a new **Web Service** on [render.com](https://render.com)
-2. Connect your repository
-3. Set **Root Directory** to `backend/`
-4. Set **Dockerfile Path** to `Dockerfile`
-5. Add environment variables:
-   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS` (from your MySQL host)
-   - `APP_SECRET` (a strong random string)
-   - `ALLOWED_ORIGIN` (your Vercel frontend URL)
-
-### Database → External MySQL
-
-For production, host MySQL externally:
-- [PlanetScale](https://planetscale.com) (serverless MySQL)
-- [Railway](https://railway.app) (MySQL plugin)
-- [Aiven](https://aiven.io) (managed MySQL)
-
-> ⚠️ **Note on free-tier cold starts:** Render free-tier services spin down after 15 minutes of inactivity. The first request after a cold start may take 30–60 seconds. Consider a paid tier or a keep-alive ping for production use.
-
----
-
-## 13. AI Usage Disclosure
-
-Parts of this project were generated with an AI tool (Google Deepmind's Antigravity) and reviewed and tested by me. All generated code was understood, verified against requirements, and adapted as needed before submission.
